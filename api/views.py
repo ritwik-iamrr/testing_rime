@@ -40,9 +40,6 @@ def test(request):
             try:
                 r = requests.get(sample_news_url_)
                 html = r.content
-            except requests.exceptions.ConnectTimeout:
-                return
-            try:
                 soup = BeautifulSoup(html, "lxml")
 
                 # Check what values are given for news
