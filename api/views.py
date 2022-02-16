@@ -21,20 +21,20 @@ def test(request):
         decoded_data.replace('{[', '[')
         decoded_data.replace(']}', ']')
         body = json.loads(decoded_data)
-        url_ = body['url']
-        regex_ = body['regex']
+        url_ = body["url"]
+        regex_ = body["regex"]
 
-        news_tags_ = body['news_tags']
-        news_attributes_ = body['news_attributes']
-        news_id_ = body['news_id']
+        news_tags_ = body["news_tags"]
+        news_attributes_ = body["news_attributes"]
+        news_id_ = body["news_id"]
 
-        desc_tag_ = body['desc_tag']
-        desc_attribute_ = body['desc_attribute']
-        desc_id_ = body['desc_id']
+        desc_tag_ = body["desc_tag"]
+        desc_attribute_ = body["desc_attribute"]
+        desc_id_ = body["desc_id"]
 
-        title_tag_ = body['title_tag']
+        title_tag_ = body["title_tag"]
 
-        sample_news_url_ = body['sample_news_url']
+        sample_news_url_ = body["sample_news_url"]
 
         error_code = {"main link": "found","news": "found" ,"title": "found", "description": "found", "status": "success"}
         # Check if the url exists
