@@ -15,6 +15,7 @@ def index():
 
 def test(request):
     if request.method == 'POST':
+        request.encoding = 'utf-8-sig'
         body = json.loads(request.body)
         url_ = body['url']
         regex_ = body['regex']
