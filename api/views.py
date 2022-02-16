@@ -36,7 +36,7 @@ def test(request):
 
         sample_news_url_ = body["sample_news_url"]
 
-        error_code = {"main link": "found", "news": "found","title": "found", "description": "found", "status": True}
+        error_code = {"mainlink": "found", "news": "found","title": "found", "description": "found", "status": True}
         # Check if the url exists
         try:
             r = requests.get(url_)
@@ -93,12 +93,12 @@ def test(request):
                     error_code["title"] = "not found"
 
             except Exception as e:
-                error_code = {"main link": "found", "news": "not found", "title": "na", "description": "na"}
+                error_code = {"mainlink": "found", "news": "not found", "title": "na", "description": "na"}
 
         except:
-            error_code = {"main link": "not found", "news": "na", "title": "na", "description": "na"}
+            error_code = {"mainlink": "not found", "news": "na", "title": "na", "description": "na"}
 
-        if error_code["main link"] == "found" and error_code["news"] == "found" and error_code["title"] == "found" and error_code["description"] == "found":
+        if error_code["mainlink"] == "found" and error_code["news"] == "found" and error_code["title"] == "found" and error_code["description"] == "found":
             error_code["status"] = True
         else:
             error_code["status"] = False
