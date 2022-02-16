@@ -88,7 +88,7 @@ def test(request):
                     error_code['title'] = 'not found'
 
             except Exception as e:
-                error_code = {'main link': 'found', 'news': 'e', 'title': 'na', 'description': 'na'}
+                error_code = {'main link': 'found', 'news': e, 'title': 'na', 'description': 'na'}
 
         except:
             error_code = {'main link': 'not found', 'news': 'na', 'title': 'na', 'description': 'na'}
