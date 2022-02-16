@@ -40,9 +40,7 @@ def test(request):
             try:
                 r = requests.get(sample_news_url_)
                 html = r.content
-            except requests.exceptions.ConnectTimeout:
-                return
-            try:
+
                 soup = BeautifulSoup(html, "lxml")
 
                 # Check what values are given for news
@@ -61,37 +59,40 @@ def test(request):
                 # Both, class and id are given
                 else:
                     latest = soup.find(news_tags_, class_=news_attributes_, id=news_id_)
+            except Exception as e:
+                error_code = {'main link': 'found', 'news': e, 'title': 'na', 'description': 'na'}
 
-                try:
-                    # Check what values are given for desc
-                    # Only tag
-                    if (desc_attribute_ is None) and (desc_id_ is None):
-                        description = (latest.find(desc_tag_)).get_text()
 
-                    # Only class
-                    elif (desc_attribute_ is not None) and (desc_id_ is None):
-                        description = (latest.find(desc_tag_, class_=desc_attribute_)).get_text()
 
-                    # Only id
-                    elif (desc_attribute_ is None) and (desc_id_ is not None):
-                        description = (latest.find(desc_tag_, id=desc_id_)).get_text()
+            try:
+                # Check what values are given for desc
+                # Only tag
+                if (desc_attribute_ is None) and (desc_id_ is None):
+                    description = (latest.find(desc_tag_)).get_text()
 
-                    # Both, class and id are given
-                    else:
-                        description = (latest.find(desc_tag_, class_=desc_attribute_, id=desc_id_)).get_text()
+                # Only class
+                elif (desc_attribute_ is not None) and (desc_id_ is None):
+                    description = (latest.find(desc_tag_, class_=desc_attribute_)).get_text()
 
-                except AttributeError:
-                    error_code['description'] = 'not found'
+                # Only id
+                elif (desc_attribute_ is None) and (desc_id_ is not None):
+                    description = (latest.find(desc_tag_, id=desc_id_)).get_text()
 
-                img = latest.find('img')
+                # Both, class and id are given
+                else:
+                    description = (latest.find(desc_tag_, class_=desc_attribute_, id=desc_id_)).get_text()
 
-                try:
-                    title = (latest.find(title_tag_)).get_text()
-                except:
-                    error_code['title'] = 'not found'
+            except AttributeError:
+                error_code['description'] = 'not found'
 
+            img = latest.find('img')
+
+            try:
+                title = (latest.find(title_tag_)).get_text()
             except:
-                error_code = {'main link': 'found', 'news': 'not found', 'title': 'na', 'description': 'na'}
+                error_code['title'] = 'not found'
+
+
 
         except:
             error_code = {'main link': 'not found', 'news': 'na', 'title': 'na', 'description': 'na'}
