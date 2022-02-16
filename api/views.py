@@ -1,3 +1,5 @@
+import base64
+import codecs
 import concurrent.futures
 import datetime
 import json
@@ -15,8 +17,10 @@ def index():
 
 def test(request):
     if request.method == 'POST':
-        request.encoding = 'utf-8-sig'
-        body = json.loads(request.body)
+        decoded_data = request.body.decode('utf-8-sig')
+        decoded_data.replace('{[', '[')
+        decoded_data.replace(']}', ']')
+        body = json.loads(decoded_data)
         url_ = body['url']
         regex_ = body['regex']
 
