@@ -125,7 +125,7 @@ def test(request):
                     else:
                         pass
                 except:
-                    error_code = {"twitter_handle": "not found", "status": False}
+                    pass
 
             if count == 0:
                 error_code = {"twitter_handle": "not found", "status": False}
