@@ -101,7 +101,7 @@ def test(request):
 
             return JsonResponse(error_code)
 
-        if scrap_type == 2:
+        if scrap_type == 3:
             url_ = body["url"]
             error_code = {"twitter_handle": "found", "status": True}
             TWITTER_CONSUMER_KEY = "6vS6tTlBo87cl38emLHtc8CVS"
@@ -135,7 +135,7 @@ def test(request):
 
             return JsonResponse(error_code)
 
-        if scrap_type == 3:
+        if scrap_type == 2:
             url_ = body["url"]
             error_code = {"rss_feed_link": "found", "status": True}
             count = 0
