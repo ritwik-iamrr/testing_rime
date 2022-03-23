@@ -114,20 +114,23 @@ def test(request):
             api = tweepy.API(auth)
 
             # tweets = tweepy.Cursor(api.user_timeline, screen_name=user, tweet_mode='extended').items(100)
-            tweets = api.user_timeline(screen_name=url_, count=50, tweet_mode='extended')
-            count = 0
-            for t in tweets:
-                try:
-                    if t.entities['urls'][0]['expanded_url'] is not None or t.entities['urls'][0]['url'] is not None:
-                        title = t.full_text
-                        if title is not None:
-                            count = count+1
-                    else:
+            try:
+                tweets = api.user_timeline(screen_name=url_, count=50, tweet_mode='extended')
+                count = 0
+                for t in tweets:
+                    try:
+                        if t.entities['urls'][0]['expanded_url'] is not None or t.entities['urls'][0]['url'] is not None:
+                            title = t.full_text
+                            if title is not None:
+                                count = count+1
+                        else:
+                            pass
+                    except:
                         pass
-                except:
-                    pass
 
-            if count == 0:
+                if count == 0:
+                    error_code = {"twitter_handle": "not found", "status": False}
+            except:
                 error_code = {"twitter_handle": "not found", "status": False}
 
             return JsonResponse(error_code)
